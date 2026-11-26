@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlatCut Help</title>
+<style>
+  :root { --fg: #1d1d1f; --bg: #ffffff; --muted: #5f6368; --line: #dadce0; --accent: #1f4f99; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e8eaed; --bg: #1e1f22; --muted: #9aa0a6; --line: #3c4043; --accent: #8ab4f8; } }
+  body { font: 15px/1.55 -apple-system, "Segoe UI", Arial, sans-serif; color: var(--fg); background: var(--bg);
+         max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 26px; margin: 0 0 4px; } h2 { font-size: 18px; margin: 28px 0 8px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .sub { color: var(--muted); margin: 0 0 16px; } code { font: 13px Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; } td { border-top: 1px solid var(--line); padding: 6px 8px 6px 0; vertical-align: top; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>FlatCut</h1>
+<p class="sub">DXF and SVG for laser cutting from Fusion in one click. Windows and macOS.</p>
+
+<h2>Where to find it</h2>
+<p>Design workspace → <b>Utilities</b> tab → <b>Add-Ins</b> panel → <b>Export to Laser</b>.</p>
+
+<h2>What it does</h2>
+<ul>
+  <li>Finds every flat plate and sheet metal part in the design and counts identical parts.</li>
+  <li>Creates the flat pattern for bent sheet metal by itself, including rolled shells (cylinders, cones). This is the only change made to your design, and it happens only when you press Export. A broken flat pattern is deleted and recreated only after you confirm.</li>
+  <li>Writes one DXF R2000 per part: closed contours, arcs instead of splines — reads in LightBurn, CypCut, SigmaNEST, Lantek, RDWorks. In CypCut engraving and bend lines land on layer 2, cut lines on the default layer.</li>
+  <li>Layers: <code>CUT</code>, <code>ENGRAVE</code> (pockets up to 1 mm deep and the part number as single-line text), <code>BEND_UP</code> / <code>BEND_DOWN</code>.</li>
+  <li>Files with anything to engrave get the <code>Gr_</code> prefix (<code>Гр_</code> in the Russian interface).</li>
+  <li>Optional SVG for Glowforge, xTool, LightBurn.</li>
+  <li><code>preview.pdf</code> on A3 (mm) or Tabloid 11×17 (inches) sheets: every part with overall size and dimensions to bend lines.</li>
+  <li>Pre-cut check after export: holes smaller than thickness, thin webs, tiny contours, text that does not fit.</li>
+</ul>
+
+<h2>Dialog</h2>
+<table>
+  <tr><td><b>Parts</b></td><td>Tick the parts to export. Non-metal and failed parts are shown greyed with the reason.</td></tr>
+  <tr><td><b>Folder name</b></td><td>Folder created in the location you pick after pressing Export.</td></tr>
+  <tr><td><b>Assemblies in order</b></td><td>Multiplies all quantities.</td></tr>
+  <tr><td><b>Include hidden parts</b></td><td>Also lists hidden bodies and components; the list is re-read when ticked.</td></tr>
+  <tr><td><b>Units</b></td><td>mm or inches, defaults to the design units. DXF, SVG, thickness in file names, preview dimensions and check messages follow it; the preview sheet is A3 for mm and Tabloid 11×17 for inches.</td></tr>
+  <tr><td><b>File name, field 1–4</b></td><td>Thickness, quantity, part name, part number, material — in any order (default: thickness, quantity, part name, part number). An example is shown below.</td></tr>
+  <tr><td><b>Bend lines</b></td><td>Adds BEND_UP / BEND_DOWN layers.</td></tr>
+  <tr><td><b>Engrave part number</b></td><td>Part number as single-line text on the ENGRAVE layer; set the text height. Only the distinguishing end is engraved: the start shared by all exported parts is dropped (ABC.91.02.00.005 → 02.00.005). Works online only: Fusion does not give part numbers offline.</td></tr>
+</table>
+<p>The preview uses the bundled Liberation Sans font (SIL Open Font License, <code>resources/fonts</code>).</p>
+<p>Settings are remembered in <code>~/.flatcut.json</code>. The interface follows the Fusion language (English or Russian).</p>
+
+<h2>Notes</h2>
+<ul>
+  <li>Exit Flat Pattern mode before running.</li>
+  <li>Flat bodies and Sheet Metal bodies are exported. A bent plate modelled as an ordinary body is listed greyed — convert it to Sheet Metal. Tubes and rolled profiles are not listed.</li>
+  <li>If Fusion makes a non-flat flat pattern, the part is listed as skipped — delete the flat pattern in the browser and run again.</li>
+  <li>Exporting again into the same folder replaces the old files.</li>
+</ul>
+
+<h2>Support</h2>
+<p>Email: <a href="mailto:ziiilma@icloud.com">ziiilma@icloud.com</a> or the Autodesk App Store page of FlatCut.</p>
+<p>Privacy: FlatCut works on your computer and sends no design data anywhere. It works offline. Part numbers are read through the Fusion API.</p>
+</body>
+</html>

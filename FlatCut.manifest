@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "c94b17ea-f03b-46f2-86e0-bde239f5569d",
+  "author": "LZA",
+  "description": {
+    "": "FlatCut: DXF/SVG for laser cutting in one click — flat patterns, engraving layer, bend lines, PDF preview, pre-cut check"
+  },
+  "version": "1.0.0",
+  "runOnStartup": true,
+  "supportedOS": "windows|mac",
+  "editEnabled": false
+}
