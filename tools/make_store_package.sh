@@ -42,6 +42,8 @@ python3 -c "import xml.dom.minidom,sys;xml.dom.minidom.parse(sys.argv[1])" "$B/P
 find "$OUT/FlatCut" "$B" \( -name '__pycache__' -o -name '.DS_Store' -o -name '.dev' \) -prune -exec rm -rf {} +
 xattr -cr "$OUT/FlatCut" "$B" 2>/dev/null || true
 (cd "$OUT" && COPYFILE_DISABLE=1 zip -qrX "FlatCut_$VER.zip" FlatCut.bundle FlatCut)
+# The palette needs one add-in manifest per asset.
+(cd "$OUT" && COPYFILE_DISABLE=1 zip -qrX "FlatCut_${VER}-universal.zip" FlatCut)
 rm -f "$SRC"/FlatCut_[0-9]*.zip
 cp "$OUT/FlatCut_$VER.zip" "$SRC/"
 echo "Done: $OUT/FlatCut_$VER.zip, $SRC/FlatCut_$VER.zip"
